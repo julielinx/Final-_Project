@@ -20,7 +20,7 @@ size(digits.cluster) #membership per cluster
 withinss(digits.cluster) #not sure what this does
 kernelf(digits.cluster) #not sure what this does either
 
-table(digits.small$label, digits.cluster[1:100]) #confusion matrix of the actual label vs the cluster it was put in
+confusionmatrix <- table(digits.small$label, digits.cluster[1:100]) #confusion matrix of the actual label vs the cluster it was put in
 #the columns in this table are the clusters and the rows are the actual handwritten numbers
 #number 0 = cluster 1
 #number 1 = cluster 10
@@ -32,6 +32,27 @@ table(digits.small$label, digits.cluster[1:100]) #confusion matrix of the actual
 #number 7 = cluster 9
 #number 8 = cluster 3
 #number 9 = cluster 7, 9
+
+cm_df <- as.data.frame.matrix(confusionmatrix)
+class(cm_df)
+
+probability <- function(x) {
+  for (i in x) {
+    x[i] <- i / sum(x)
+    return(i)
+  }
+}
+error <- probability(vector)
+error
+sum(vector)
+
+vector <- as.vector(c(4, 8, 5, 9, 7, 5))
+
+
+trial <- sapply(cm_df, probability)
+
+trial
+
 
 
 #Results had 2,3, and 5 numbers in cluster 8, and number 9 in clusters 7 and 9.
@@ -83,20 +104,20 @@ table(digits.med$label, digits.cluster.med[1:1000]) #confusion matrix of the act
 # 1 = 7, or 9, 4            0 = 7, maybe 6
 # 2 = 1                     1 = 2, maybe 9
 # 3 = 8, maybe 3, 5, 2      2 = 4
-# 4 = 2      3 = 8
-# 5 = 5      4 = 1
-# 6 = 0      5 = 3, or 6,8
-# 7 = 0      6 = 10
-# 8 = 3      7 = 1
-# 9 = 1      8 = 3
-#10 = 6      9 = 1
+# 4 = 2                     3 = 8
+# 5 = 5 or 6                4 = 1
+# 6 = 0, maybe 5, 3         5 = 3, or 6,8
+# 7 = 0                     6 = 10
+# 8 = 3, maybe 8, 5         7 = 1
+# 9 = 1                     8 = 3
+#10 = 6                     9 = 1
 #need cluster for 4, 9
-#had trouble differentiating between 7, 9, 4
+#had trouble differentiating between 7, 9, 4, and 3, 5
 
 #try using a larger sized dataset to improve your results
-digits.lg <- digits.train[1:5000,] #see if a larger dataset will run on your laptop
+digits.lg <- digits.train[1:2000,] #see if a larger dataset will run on your laptop
 digits.nolabellg <- as.matrix(digits.lg[,2:785]) #remove the labels from the medium dataset for model training
 
 #run the specc spectral clustering algorithm and look at the results
 (digits.cluster.lg <- specc(digits.nolabellg, centers = 10))
-table(digits.lg$label, digits.cluster.lg[1:5000])
+table(digits.lg$label, digits.cluster.lg[1:2000])
