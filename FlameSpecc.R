@@ -20,20 +20,3 @@ withinss(sc.Flame)
 plot(sc.Flame,col=sc.Flame)
 class(DataSet)
 
-
-
-data(flame.data)
-head(spirals)
-str(spirals)
-class(spirals)
-spirals <- as.data.frame(spirals)
-class(spirals)
-spirals <- as.matrix(spirals)
-sc <- specc(spirals, centers=2)
-
-sc
-centers(sc)
-size(sc)
-withinss(sc)
-
-plot(spirals, col=sc)
