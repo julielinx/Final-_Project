@@ -17,6 +17,7 @@ digits.cluster <- specc(digits.nolabelsm, centers = 10)
 digits.cluster
 digits.cluster[1:100] #get the cluster results - which variable was put into which cluster
 size(digits.cluster) #membership per cluster
+
 withinss(digits.cluster) #not sure what this does
 kernelf(digits.cluster) #not sure what this does either
 
