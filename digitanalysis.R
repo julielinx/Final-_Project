@@ -23,18 +23,18 @@ digits.model.km <- kmeans(digits.small[,2:785], 10, nstart=20)
 (digits.con_mat.km <- table(digits.small$label, digits.model.km$cluster))
 
 
+#use bdscan clustering
+kNNdistplot(digits.train, 10) #get the eps for the dbscan model. Need the y value at the elbow on the plot
+digits.model.db <- dbscan(digits.train, eps=1700, minPts = 4)
+(digits.con_mat.db <- table(digits.small$label, digits.model.db$cluster))
+
+
 #use SamSPECTRAL clustering - not working
 digits.model.sam <- SamSPECTRAL(digits.train[1:100, ], dimensions=c(1,2,3, 4, 5, 6, 7, 8, 9, 10), normal.sigma = 5, separation.factor = 0.7)
 (digits.con_mat.sam <- table(digits.small$label, digits.model.sam))
 
 
-#use bdscan clustering
-kNNdistplot(digits.train, 10) #get the eps for the dbscan model. Need the y value at the elbow on the plot
-digits.model.db <- dbscan(digits.train, eps=1200, minPts = 4)
-(digits.con_mat.db <- table(digits.small$label, digits.model.db$cluster))
-
-
-#use kknn a nearest neighbors algorithm
+#use kknn a nearest neighbors algorithm - not working
 digits.model.kknn <- specClust(digits.small[,2:785], centers=10)
 (digits.con_mat.kknn <- table(digits.small$label, digits.model.kknn$cluster))
 
