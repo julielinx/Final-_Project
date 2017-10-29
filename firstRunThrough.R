@@ -36,17 +36,11 @@ confusionmatrix <- table(digits.small$label, digits.cluster[1:100]) #confusion m
 cm_df <- as.data.frame.matrix(confusionmatrix)
 class(cm_df)
 
-probability <- function(x) {
-  for (i in x) {
-    x[i] <- i / sum(x)
-    return(i)
-  }
+cond_prob <- function(x) {
+  vapply(seq_along(x), function(i) x[i] / sum(x[-i]), numeric(1))
 }
-error <- probability(vector)
-error
-sum(vector)
 
-vector <- as.vector(c(4, 8, 5, 9, 7, 5))
+confusionmatrix
 
 
 trial <- sapply(cm_df, probability)
@@ -121,3 +115,27 @@ digits.nolabellg <- as.matrix(digits.lg[,2:785]) #remove the labels from the med
 #run the specc spectral clustering algorithm and look at the results
 (digits.cluster.lg <- specc(digits.nolabellg, centers = 10))
 table(digits.lg$label, digits.cluster.lg[1:2000])
+
+head(iris)
+class(iris)
+irisma <- as.matrix(iris[,1:4])
+head(irisma)
+class(irisma)
+
+
+modeli <- specc(irisma, centers = 3)
+modeli
+iris_con_mat <- table(iris$Species, modeli[1:150])
+iris_con_mat
+
+digits.nolabelsm <- as.matrix(digits.small[,2:785]) #remove the labels from the small dataset for model training
+
+#run the specc spectral clustering algorithm and look at the results
+digits.cluster <- specc(digits.nolabelsm, centers = 10)
+digits.cluster
+digits.cluster[1:100] #get the cluster results - which variable was put into which cluster
+size(digits.cluster) #membership per cluster
+withinss(digits.cluster) #not sure what this does
+kernelf(digits.cluster) #not sure what this does either
+
+confusionmatrix <- table(digits.small$label, digits.cluster[1:100])
