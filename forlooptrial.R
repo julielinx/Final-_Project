@@ -64,5 +64,10 @@ iris.con_mat.km[3,] / sum(iris.con_mat.km[3,])
 prob2 <- function(x, i) {
   x[i,] <- x[i,] / sum(x[i,])
 }
-error <- prob2(iris.con_mat.km, 1:3)
-error
+
+pro2 <- function(x){
+  for (i in 1:nrow(as.vector(x))) {
+    row.val <- (x[i,] / sum(x))
+  }
+}
+get.Func <- pro2(iris.con_mat.km)

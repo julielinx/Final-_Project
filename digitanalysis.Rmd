@@ -1,0 +1,38 @@
+---
+title: "digitanalysis"
+author: "Julie Fisher"
+date: "October 29, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(kernlab)
+library(SamSPECTRAL)
+library(kknn)
+library(dbscan)
+library(cluster)
+setwd("~/Learning/Lipscomb MSDS/Data Mining/Final _Project")
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r read in}
+digits.full <- read.csv('MNIST/train.csv')
+digits.small <- digits.full[1:100,] #make the dataset smaller in order to run it on your laptop
+digits.train <- as.matrix(digits.small[,2:785])
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
