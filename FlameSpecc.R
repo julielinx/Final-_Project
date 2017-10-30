@@ -3,7 +3,7 @@ library(ggplot2)
 library(readr)
 library(kernlab)
 
-# rm(list=ls())
+ rm(list=ls())
 setwd("~/Desktop/DataMining/Final-_Project/")
 DataSet <- read.table("FlameDataset.csv",quote ="\"",comment.char ="")
 colnames(DataSet) <- c("ColOne","ColTwo","ColThree")
@@ -43,9 +43,4 @@ flame.smallSet <- flame.Train[1:100,]
 
 # Let us model the training set to matrix by removing the labels
 flame.nolabelsm <- as.matrix(flame.smallSet[,2:785])
-
-
-
-
-
 
