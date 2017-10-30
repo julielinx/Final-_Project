@@ -11,7 +11,7 @@ iris.train <- as.matrix(iris[,1:4])
 iris.model.specc <- specc(iris.train, centers = 3)
 (iris.con_mat.specc <- table(iris.model.specc[1:150], iris$Species))
 (iris.Bays.specc <- prop.table(iris.con_mat.specc, 1))
-clusplot(iris, iris.model[1:150], color=T, shade=T, labels=0, lines=0)
+clusplot(iris, iris.model.specc[1:150], color=T, shade=T, labels=0, lines=0)
 
 
 #use kmeans clustering
